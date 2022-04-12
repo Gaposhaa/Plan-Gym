@@ -1,9 +1,8 @@
-from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.template.loader import get_template
-
 from .models import Couches, SportStyle, PriceList
 from .form import ContactForm
+from django.core.mail import send_mail, BadHeaderError
 
 
 def home(request):
@@ -55,26 +54,15 @@ def contacts(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             send_message(form.cleaned_data["name"], form.cleaned_data["email"], form.cleaned_data["message"])
-            context = {"success": 1}
     else:
         form = ContactForm()
-        context["form"] = form
+    context["form"] = form
     return render(
         request,
         "gymapp/contacts.html",
-        context
+        context=context,
     )
 
 
 def send_message(name, email, message):
-    text = get_template("message.html")
-    html = get_template("message.html")
-    context = {"name": name, "email": email, "message": message}
-    subject = "Сообщение от пользователя"
-    from_email = "from@example.com"
-    text_content = text.render(context)
-    html_content = html.render(context)
-
-    msg = EmailMultiAlternatives(subject, text_content, from_email, ["gaposhaa@1987gmail.com"])
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    pass

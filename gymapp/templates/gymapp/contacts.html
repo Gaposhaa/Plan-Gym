@@ -7,9 +7,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 <div class="wrapper">
-    <span class="bigred">Artem</span>
     <div class="form">
-        <form action=""  class="form_body" method="post">
+        <form action=""  class="form_body" method="POST">
             {% csrf_token %}
             <h1 class="form_title">Обратная связь</h1>
             <div class="form_item">

@@ -37,3 +37,13 @@ class PriceList(models.Model):
     class Meta:
         verbose_name = "Цена"
         verbose_name_plural = "Прайс-лист"
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=30)
+    message = models.TextField(max_length=1000)
+
+    def __str__(self):
+        # Будет отображаться следующее поле в панели администрирования
+        return self.email
