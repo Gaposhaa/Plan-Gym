@@ -1,0 +1,13 @@
+{%extends "gymapp/base.html" %}
+{% block title %}
+Кроссфит(старт)
+{% endblock %}
+
+{% block content %}
+{% for i in crossfit_start %}
+    <div class="alert alert-warning">
+      <h3>{{ i.name }}</h3>
+      <p>{{ i.direction_information }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

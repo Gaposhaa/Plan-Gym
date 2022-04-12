@@ -1,0 +1,16 @@
+{%extends "gymapp/base.html" %}
+{% block title %}
+Тренеры
+{% endblock %}
+
+{% block content %}
+<div class="features">
+  <h1>Тренеры</h1>
+  {% for i in coaches %}
+    <div class="alert alert-warning">
+      <h3>{{ i.name }}</h3>
+      <p>{{ i.coach_information }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
