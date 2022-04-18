@@ -7,6 +7,3 @@ admin.site.register(PriceList)
 admin.site.register(SportStyle)
 
 
-@admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
-    pass

@@ -8,7 +8,7 @@
   <h1>Тренеры</h1>
   {% for i in coaches %}
     <div class="alert alert-warning">
-      <h3>{{ i.name }}</h3>
+      <a href="{% url 'coach-detail' i.id %}"><h3>{{ i.name }}</h3></a>
       <p>{{ i.coach_information }}</p>
     </div>
   {% endfor %}
