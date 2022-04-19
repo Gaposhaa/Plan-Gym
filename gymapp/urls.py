@@ -6,6 +6,7 @@ urlpatterns = [
     path("about_us", views.about_us, name="gym-about_us"),
     path("coaches", views.CoachesListView.as_view(), name="gym-coaches"),
     path("coaches/<int:pk>/", views.CoachesDetailView.as_view(), name="coach-detail"),
+    path("coaches/<int:pk>/update/", views.CoachUpdateView.as_view(), name="coach-update"),
     path("price", views.price_list, name="gym-price"),
     path("crossfit", views.crossfit, name="gym-crossfit"),
     path("crossfit-start", views.crossfit_start, name="gym-crossfit-start"),

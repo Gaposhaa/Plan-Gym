@@ -1,20 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import UpdateView, DetailView, ListView
 from .models import Couches, SportStyle, PriceList
 from .form import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
-from django.views import generic
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class CoachesListView(generic.ListView):
+class CoachesListView(ListView):
     model = Couches
     template_name = "gymapp/coaches.html"
     context_object_name = "coaches"
 
 
-class CoachesDetailView(generic.DetailView):
+class CoachesDetailView(PermissionRequiredMixin, DetailView):
     model = Couches
+    permission_required = ["gymapp.view_couches",
+                           "gymapp.add_couches",
+                           "gymapp.delete_couches"]
+    fields = ("name",
+              "coach_information")
+
+
+class CoachUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Couches
+    fields = ("name",
+              "coach_information")
 
 
 def home(request):

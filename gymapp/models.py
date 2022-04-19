@@ -1,9 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Couches(models.Model):
-    gym_admin = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Ст. тренер", null=True)
     name = models.CharField("Имя", max_length=15)
     coach_information = models.TextField("Описание")
 

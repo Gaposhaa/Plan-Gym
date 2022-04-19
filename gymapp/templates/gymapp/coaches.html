@@ -8,8 +8,14 @@
   <h1>Тренеры</h1>
   {% for i in coaches %}
     <div class="alert alert-warning">
-      <a href="{% url 'coach-detail' i.id %}"><h3>{{ i.name }}</h3></a>
-      <p>{{ i.coach_information }}</p>
+      {% if user.is_superuser %}
+        <h3>{{ i.name }}</h3>
+        <p>{{ i.coach_information }}</p>
+        <a class="btn btn-danger btn-sm mt -1 mb-1" href="{% url 'coach-detail' i.id %}">Изменить</a>
+      {% else %}
+        <h3>{{ i.name }}</h3>
+        <p>{{ i.coach_information }}</p>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
