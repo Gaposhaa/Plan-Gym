@@ -1,0 +1,18 @@
+{%extends "gymapp/base.html" %}
+{% block title %}
+Удаление
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+<div class="wrapper">
+    <div class="form">
+        <form action=""  class="form_body" method="POST">
+            {% csrf_token %}
+            <h1 class="form_title">Удаление тренера</h1>
+        <button type="submit" class="form_button">Удалить тренера</button>
+    </form>
+    </div>
+</div>
+{% endblock %}
