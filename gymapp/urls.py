@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.home, name="gym-home"),
     path("about_us", views.about_us, name="gym-about_us"),
-    path("coaches", views.CoachesListView.as_view(), name="gym-coaches"),
+    path("coaches", views.CoachPageView.as_view(), name="gym-coaches"),
     path("coaches/<int:pk>/", views.CoachesDetailView.as_view(), name="coach-detail"),
     path("coaches/<int:pk>/update", views.CoachesUpdateView.as_view(), name="coach-update"),
     path("coaches/<int:pk>/delete", views.CoachesDeleteView.as_view(), name="coach-delete"),
@@ -18,3 +20,5 @@ urlpatterns = [
     path("contacts", views.contacts, name="gym-contacts"),
     path("thanks", views.thanks, name="gym-thanks"),
 ]
+
+

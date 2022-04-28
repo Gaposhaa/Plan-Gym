@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -21,10 +22,10 @@ class DataMixin:
         return context
 
 
-class CoachesListView(ListView):
-    model = Coaches
-    template_name = "gymapp/coaches.html"
-    context_object_name = "coaches"
+def coaches(request):
+    coaches_list = Coaches.objects.all()
+    context_dict = {"coach": coaches_list}
+    return render(request, "gymapp/coaches.html", context_dict)
 
 
 class CoachesDetailView(PermissionRequiredMixin, DetailView):
@@ -39,7 +40,9 @@ class CoachesDetailView(PermissionRequiredMixin, DetailView):
 class CoachesCreateView(CreateView):
     model = Coaches
     form_class = UpdateCoachesForm
+    context = {"coach": Coaches.objects.all()}
     template_name = "gymapp/create.html"
+    success_url = "/coaches"
 
 
 class CoachesUpdateView(UpdateView):
@@ -52,6 +55,11 @@ class CoachesDeleteView(DeleteView):
     model = Coaches
     success_url = "/coaches"
     template_name = "gymapp/coach_delete.html"
+
+
+class CoachPageView(ListView):
+    model = Coaches
+    template_name = "gymapp/coaches.html"
 
 
 class LoginManager(DataMixin, LoginView):

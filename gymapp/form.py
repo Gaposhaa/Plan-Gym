@@ -8,7 +8,7 @@ class ContactForm(forms.Form):
     name = forms.CharField(
         min_length=2,
         widget=forms.TextInput(
-            attrs={"placeholder": "Ваше имя", "class": "form_input",
+            attrs={"placeholder": "Ваше имя", "class": "form_input", "font-color": "black"
                    }
         )
     )
@@ -43,16 +43,9 @@ class GymManageForm(AuthenticationForm):
 class UpdateCoachesForm(forms.ModelForm):
     class Meta:
         model = Coaches
-        fields = ["name", "coach_information"]
+        fields = ["name", "coach_information", "photo"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class': 'form_input'})
-        self.fields['coach_information'].widget.attrs.update({'class': 'form_input'})
-
-
-
-
-
-
-
+        self.fields['name'].widget.attrs.update({"placeholder": "Имя тренера", "class": "form_input"})
+        self.fields['coach_information'].widget.attrs.update({"placeholder": "Информация", "class": "form_input"})

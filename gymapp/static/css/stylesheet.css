@@ -77,10 +77,22 @@ body{
     box-shadows: 0 0 20px #7a956b;
 }
 
-textarea.form_input{
+textarea.form_input {
     min_height: 120px;
     resize: vertical;
     padding: 20px;
+    color: #000000;
+}
+
+input[type=email] {
+    color: #000000;
+}
+
+input[type=text] {
+    color: #000000;
+}
+
+input[type=password] {
     color: #000000;
 }
 
@@ -151,3 +163,24 @@ textarea.form_input{
 .form_button:active{
     top: 5px;
     box-shadows: 0 2px 0 #161b13;
+}
+
+table {
+    font-family: sans-serif;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 15px;
+    background: #FFCCCC;
+    border: 16px solid #FFCCCC;
+    border-radius: 20px;
+}
+
+th {
+    font-size: 20px;
+    padding: 10px;
+}
+
+td {
+    background: #FFDDDD;
+    padding: 10px;
+}
