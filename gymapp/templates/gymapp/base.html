@@ -40,10 +40,10 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %}
-          <li><a href="#">{{ user.username }} / Личный Кабинет</a></li>
-          <li><a href="{% url 'manage-logout' %}">Выйти</a></li>
+          <li><a href="{% url 'accounts-profile' %}">{{ user.username }} / Личный Кабинет</a></li>
+          <li><a href="{% url 'auth-logout' %}">Выйти</a></li>
           {% else %}
-            <li><a href="{% url 'manage-login' %}">Авторизация</a></li>
+            <li><a href="{% url 'auth-login' %}">Авторизация</a></li>
             <li><a href="{% url 'gym-contacts' %}">Обратная связь</a></li>
           {% endif %}
         </ul>

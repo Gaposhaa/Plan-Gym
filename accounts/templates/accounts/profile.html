@@ -1,0 +1,12 @@
+{% extends "gymapp/base.html" %}
+{% block title %}
+Личный кабинет({{ user.username }})
+{% endblock %}
+
+{% block content %}
+<div class="features">
+      <div class="example-block">
+         <h3>Добро пожаловать {{ user.username }}! Здесь будет информация для вашего личного кабинета!</h3>
+      </div>
+</div>
+{% endblock %}

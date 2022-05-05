@@ -4,8 +4,6 @@
 {% endblock %}
 
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 <div class="features">
   <h1>Тренеры</h1>
   {% if request.user.get_group_permissions %}
@@ -17,11 +15,13 @@
           <a class="btn btn-danger btn-sm mt -1 mb-1" href="{% url 'coach-delete' object.pk %}">Удалить</a>
       </div>
     {% else %}
-      <div class="example-block">
-          <img class="example-image" src="{{ object.photo.url }}">
-          <h3>{{ object.name }}</h3>
-          <p>{{ object.coach_information }}</p>
+    <div class="example-block">
+        <img class="example-image" src="{{ object.photo.url }}">
+    </div>
+    <div class="example-block">
+      <h3>{{ object.name }}</h3>
+      <p>{{ object.coach_information }}</p>
+    </div>
     {% endif %}
-      </div>
 </div>
 {% endblock %}

@@ -51,7 +51,7 @@ class CoachesDeleteView(DeleteView):
     template_name = "gymapp/coach_delete.html"
 
 
-class LoginManager(DataMixin, LoginView):
+class LoginAuth(DataMixin, LoginView):
     form_class = GymManageForm
     template_name = "gymapp/login.html"
 
@@ -61,7 +61,7 @@ class LoginManager(DataMixin, LoginView):
         return dict(list(context.items()) + list(m_def.items()))
 
     def get_success_url(self):
-        return reverse_lazy("gym-coaches")
+        return reverse_lazy("accounts-profile")
 
 
 def home(request):
@@ -100,9 +100,9 @@ def weightlifting(request):
     return render(request, "gymapp/weightlifting.html", context)
 
 
-def logout_manager(request):
+def logout_auth(request):
     logout(request)
-    return redirect("manage-login")
+    return redirect("auth-login")
 
 
 def contacts(request):
