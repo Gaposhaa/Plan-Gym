@@ -1,6 +1,6 @@
 {%extends "gymapp/base.html" %}
 {% block title %}
-Обратная связь
+Изменение
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,8 @@
     <div class="form">
         <form action=""  class="form_body" method="POST">
             {% csrf_token %}
-            <h1 class="form_title">Обратная связь</h1>
+            <h1 class="form_title">Изменение информации</h1>
+            <div class="form-error">{{ form.non_field_errors }}</div>
             <div class="form_item">
                 <label for="formName" class="form_label">Имя</label>
                 {{ form.name }}
@@ -21,26 +22,16 @@
                 </div>
             {% endif %}
             <div class="form_item">
-                <label for="formEmail" class="form_label">E-mail</label>
-                {{ form.email }}
+                <label for="formCoach_information" class="form_label">Информация</label>
+                {{ form.coach_information }}
             </div>
 
-            {% if form.email.errors %}
+            {% if form.coach_information.errors %}
                 <div class="alert alert-danger">
-                    <strong>{{ form.email.errors }}</strong>
+                    <strong>{{ form.coach_information.errors }}</strong>
                 </div>
             {% endif %}
-            <div class="form_item">
-                <label for="formMessage" class="form_label">Сообщение</label>
-                {{ form.message }}
-            </div>
-            {% if success %}
-                <div class="alert alert-danger">
-                    <strong>Спасибо за сообщение!</strong>
-                </div>
-            {% endif %}
-
-            <button type="submit" class="form_button">Отправить</button>
+            <button type="submit" class="form_button">Изменить</button>
         </form>
     </div>
 </div>

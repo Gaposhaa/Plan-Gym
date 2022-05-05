@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 {% for i in crossfit %}
   <div class="alert alert-warning">
     <h3>{{ i.name }}</h3>

@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
+from gymapp.models import Coaches
 
 
 class ContactForm(forms.Form):
@@ -12,10 +15,10 @@ class ContactForm(forms.Form):
 
     email = forms.EmailField(
         widget=forms.EmailInput(
-            attrs={"placeholder": "Ваш email",
-                   "class": "form_input"}
-        )
-    )
+                attrs={"placeholder": "Ваш email",
+                       "class": "form_input"}
+                )
+            )
 
     message = forms.CharField(
         min_length=5,
@@ -26,3 +29,30 @@ class ContactForm(forms.Form):
                    }
         )
     )
+
+
+class GymManageForm(AuthenticationForm):
+    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"placeholder": "Логин",
+                                                                            "class": "form_input",
+                                                                            "font color": "black"}))
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"placeholder": "Пароль",
+                                                                                 "class": "form_input",
+                                                                                 "font color": "black"}))
+
+
+class UpdateCoachesForm(forms.ModelForm):
+    class Meta:
+        model = Coaches
+        fields = ["name", "coach_information"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form_input'})
+        self.fields['coach_information'].widget.attrs.update({'class': 'form_input'})
+
+
+
+
+
+
+

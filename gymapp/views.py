@@ -1,21 +1,34 @@
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import UpdateView, DetailView, ListView
-from .models import Couches, SportStyle, PriceList
-from .form import ContactForm
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
+from .models import Coaches, SportStyle, PriceList
+from .form import ContactForm, GymManageForm, UpdateCoachesForm
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
+class DataMixin:
+    def get_user_context(self, **kwargs):
+        context = kwargs
+        coaches = Coaches.objects.all()
+        menu = {"title": "Войти", "url": "login"}
+        context["menu"] = menu
+        context["coaches"] = coaches
+        return context
+
+
 class CoachesListView(ListView):
-    model = Couches
+    model = Coaches
     template_name = "gymapp/coaches.html"
     context_object_name = "coaches"
 
 
 class CoachesDetailView(PermissionRequiredMixin, DetailView):
-    model = Couches
+    model = Coaches
     permission_required = ["gymapp.view_couches",
                            "gymapp.add_couches",
                            "gymapp.delete_couches"]
@@ -23,10 +36,35 @@ class CoachesDetailView(PermissionRequiredMixin, DetailView):
               "coach_information")
 
 
-class CoachUpdateView(PermissionRequiredMixin, UpdateView):
-    model = Couches
-    fields = ("name",
-              "coach_information")
+class CoachesCreateView(CreateView):
+    model = Coaches
+    form_class = UpdateCoachesForm
+    template_name = "gymapp/create.html"
+
+
+class CoachesUpdateView(UpdateView):
+    model = Coaches
+    form_class = UpdateCoachesForm
+    template_name = "gymapp/update.html"
+
+
+class CoachesDeleteView(DeleteView):
+    model = Coaches
+    success_url = "/coaches"
+    template_name = "gymapp/coach_delete.html"
+
+
+class LoginManager(DataMixin, LoginView):
+    form_class = GymManageForm
+    template_name = "gymapp/login.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        m_def = self.get_user_context(title="Авторизация")
+        return dict(list(context.items()) + list(m_def.items()))
+
+    def get_success_url(self):
+        return reverse_lazy("gym-coaches")
 
 
 def home(request):
@@ -67,6 +105,11 @@ def weightlifting(request):
         "weightlifting": SportStyle.objects.order_by("name")[2:],
     }
     return render(request, "gymapp/weightlifting.html", context)
+
+
+def logout_manager(request):
+    logout(request)
+    return redirect("manage-login")
 
 
 def contacts(request):
