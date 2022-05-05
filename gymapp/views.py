@@ -1,5 +1,5 @@
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group, User
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -9,7 +9,6 @@ from .models import Coaches, SportStyle, PriceList
 from .form import ContactForm, GymManageForm, UpdateCoachesForm
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class DataMixin:
@@ -22,19 +21,14 @@ class DataMixin:
         return context
 
 
-def coaches(request):
-    coaches_list = Coaches.objects.all()
-    context_dict = {"coach": coaches_list}
-    return render(request, "gymapp/coaches.html", context_dict)
-
-
-class CoachesDetailView(PermissionRequiredMixin, DetailView):
+class CoachPageView(ListView):
     model = Coaches
-    permission_required = ["gymapp.view_couches",
-                           "gymapp.add_couches",
-                           "gymapp.delete_couches"]
-    fields = ("name",
-              "coach_information")
+    template_name = "gymapp/coaches.html"
+
+
+class CoachesDetailView(DetailView):
+    model = Coaches
+    fields = ("name", "coach_information")
 
 
 class CoachesCreateView(CreateView):
@@ -57,11 +51,6 @@ class CoachesDeleteView(DeleteView):
     template_name = "gymapp/coach_delete.html"
 
 
-class CoachPageView(ListView):
-    model = Coaches
-    template_name = "gymapp/coaches.html"
-
-
 class LoginManager(DataMixin, LoginView):
     form_class = GymManageForm
     template_name = "gymapp/login.html"
@@ -77,10 +66,6 @@ class LoginManager(DataMixin, LoginView):
 
 def home(request):
     return render(request, "gymapp/home.html")
-
-
-def about_us(request):
-    return render(request, "gymapp/about.html")
 
 
 def thanks(request):
@@ -146,7 +131,3 @@ def contacts(request):
         "gymapp/contacts.html",
         context=context,
     )
-
-
-def send_message(name, email, message):
-    pass

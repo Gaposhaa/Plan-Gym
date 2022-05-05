@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Coaches(models.Model):
-    name = models.CharField("Имя", max_length=15,)
+    name = models.CharField("Имя", max_length=15)
     coach_information = models.TextField("Описание")
     photo = models.ImageField(upload_to="coach_photo", default="default.jpg", blank=True)
 
@@ -12,7 +12,6 @@ class Coaches(models.Model):
     def get_absolute_url(self):
         return f"/coaches/{self.id}"
 
-
     class Meta:
         verbose_name = "Тренер"
         verbose_name_plural = "Тренеры"
@@ -21,6 +20,7 @@ class Coaches(models.Model):
 class SportStyle(models.Model):
     name = models.CharField("Название", max_length=20)
     direction_information = models.TextField("Описание направления")
+    photo = models.ImageField(upload_to="style_photo", default="default.jpg", blank=True)
 
     def __str__(self):
         return self.name
@@ -44,10 +44,4 @@ class PriceList(models.Model):
         verbose_name_plural = "Прайс-лист"
 
 
-class Contact(models.Model):
-    first_name = models.CharField(max_length=20)
-    email = models.EmailField(max_length=30)
-    message = models.TextField(max_length=1000)
 
-    def __str__(self):
-        return self.email

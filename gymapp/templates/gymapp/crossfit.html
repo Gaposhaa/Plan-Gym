@@ -4,10 +4,9 @@
 {% endblock %}
 
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 {% for i in crossfit %}
-  <div class="alert alert-warning">
+  <div class="example-block">
+    <img class="example-image" src="{{ i.photo.url }}">
     <h3>{{ i.name }}</h3>
     <p>{{ i.direction_information }}</p>
   </div>

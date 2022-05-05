@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <meta charset="utf-8">
@@ -9,6 +10,7 @@
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
 </head>
 <body>
   <nav class="navbar navbar-inverse" role="navigation">
@@ -25,7 +27,6 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="{% url 'gym-home' %}">Главная</a></li>
-          <li><a href="{% url 'gym-about_us' %}">О нас</a></li>
           <li><a href="{% url 'gym-coaches' %}">Тренеры</a></li>
           <li><a href="{% url 'gym-price' %}">Прайс-лист</a></li>
           <li class="dropdown">
@@ -39,7 +40,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %}
-          <li class="last"> {{ user.username }}</li>
+          <li><a href="#">{{ user.username }} / Личный Кабинет</a></li>
           <li><a href="{% url 'manage-logout' %}">Выйти</a></li>
           {% else %}
             <li><a href="{% url 'manage-login' %}">Авторизация</a></li>

@@ -27,11 +27,17 @@ h6{
     font-weight: inherit;
     font-size: inherit;
 }
+
 html,
 body{
     height: 100%;
     line-height: 1;
     font-size: 14px;
+    background-image: url(https://phonoteka.org/uploads/posts/2021-07/1625615939_14-phonoteka-org-p-krossfit-art-krasivo-14.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     background-color: #333;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
@@ -183,4 +189,22 @@ th {
 td {
     background: #FFDDDD;
     padding: 10px;
+}
+
+.example-block{
+    background: #FFDDDD;
+    border: 1px solid #000;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    font-family: Arial, "Helvetica-Neue", Helvetica, sans-serif;
+    padding: 15px;
+    margin: 50px 500px 50px 500px;
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 10px #000;
+}
+.example-image {
+    width: 100%;
+    max-width: 700px;
 }

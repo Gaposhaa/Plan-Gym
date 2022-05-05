@@ -5,19 +5,13 @@
 
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
-<div>
-  <div class="alert alert-warning">
-  <ul>
-    {% for i in object_list %}
-      <li>{{ i.name }}</li>
-      <li>{{ i.coach_information }}</li>
-      <li><img src="{{ i.photo.url}}" alt="{{ i.name }}"></li>
-    {% endfor %}
-  </ul>
-  </div>
-  {% if request.user.get_group_permissions %}
-    <a class="btn btn-danger btn-sm mt -1 mb-1" href="{% url 'coach-create' %}">Добавить тренера</a>
-  {% endif %}
-</div>
+{% for i in object_list %}
+    <div class="example-block">
+      <a href="{% url 'coach-detail' i.id %}">{{ i.name }}</a>
+      <a href="{% url 'coach-detail' i.id %}"><img class="example-image" src="{{ i.photo.url}}"></a>
+    </div>
+{% endfor %}
+{% if request.user.is_authenticated %}
+  <a class="form_button" type="submit" href="{% url 'coach-create' %}">Добавить тренера</a>
+{% endif %}
 {% endblock %}
