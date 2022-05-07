@@ -1,0 +1,25 @@
+{%extends "gymapp/base.html" %}
+{% block title %}
+Бронирование
+{% endblock %}
+
+{% block content %}
+<div class="features">
+              <h1>Ваш выбор</h1>
+                <table>
+                  <tr>
+                      <th>Тренер</th>
+                      <th>Вид спорта</th>
+                      <th>Кол-во тренировок</th>
+                      <th>Стоимость</th>
+                  </tr>
+                    <tr>
+                        <td>{{ object.coach }}</td>
+                        <td>{{ object.sport_style }}</td>
+                        <td>{{ object.number_of_training }}</td>
+                        <td>{{ object.price }}</td>
+                    </tr>
+                </table>
+    <a class="btn btn-info btn-sm mt -1 mb-1" href="{% url 'price-booking' %}">Изменить</a>
+</div>
+{% endblock %}

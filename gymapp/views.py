@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
 from .models import Coaches, SportStyle, PriceList
-from .form import ContactForm, GymManageForm, UpdateCoachesForm
+from gymapp.form import ContactForm, GymManageForm, UpdateCoachesForm
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 
@@ -51,6 +51,16 @@ class CoachesDeleteView(DeleteView):
     template_name = "gymapp/coach_delete.html"
 
 
+class PricePageView(ListView):
+    model = PriceList
+    template_name = "gymapp/price.html"
+
+
+class PriceDetailView(DetailView):
+    model = PriceList
+    fields = ("number_of_training", "price", "coach", "sport_style")
+
+
 class LoginAuth(DataMixin, LoginView):
     form_class = GymManageForm
     template_name = "gymapp/login.html"
@@ -70,13 +80,6 @@ def home(request):
 
 def thanks(request):
     return render(request, "gymapp/thanks.html")
-
-
-def price_list(request):
-    context = {
-        "price_list": PriceList.objects.all(),
-    }
-    return render(request, "gymapp/price.html", context)
 
 
 def crossfit(request):

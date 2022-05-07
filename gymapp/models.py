@@ -42,6 +42,3 @@ class PriceList(models.Model):
     class Meta:
         verbose_name = "Цена"
         verbose_name_plural = "Прайс-лист"
-
-
-

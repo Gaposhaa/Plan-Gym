@@ -1,0 +1,45 @@
+{%extends "gymapp/base.html" %}
+{% block title %}
+Бронирование
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="form">
+        <form action=""  class="form_body" method="POST">
+            {% csrf_token %}
+            <h1 class="form_title">Обратная связь</h1>
+            <div class="form_item">
+                <label for="formName" class="form_label">Имя</label>
+                {{ form.name }}
+            </div>
+                {% if form.name.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.name.errors }}</strong>
+                </div>
+                {% endif %}
+            <div class="form_item">
+                <label for="formEmail" class="form_label">E-mail</label>
+                {{ form.email }}
+            </div>
+
+            {% if form.email.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.email.errors }}</strong>
+                </div>
+            {% endif %}
+            <div class="form_item">
+                <label for="formMessage" class="form_label">Сообщение</label>
+                {{ form.message }}
+            </div>
+            {% if success %}
+                <div class="alert alert-danger">
+                    <strong>Спасибо за сообщение!</strong>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="form_button">Отправить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

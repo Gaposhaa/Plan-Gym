@@ -15,13 +15,19 @@
                 <th>Вид спорта</th>
                 <th>Кол-во тренировок</th>
                 <th>Стоимость</th>
+                {% if request.user.is_authenticated %}
+                    <th>Бронь</th>
+                {% endif %}
             </tr>
-            {% for i in price_list %}
+            {% for i in object_list %}
             <tr>
                 <td>{{ i.coach }}</td>
                 <td>{{ i.sport_style }}</td>
                 <td>{{ i.number_of_training }}</td>
                 <td>{{ i.price }}</td>
+                {% if request.user.is_authenticated %}
+                    <td><a class="btn btn-info btn-sm mt -1 mb-1" href="{% url 'pricelist-detail' i.id %}">Заказать</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
